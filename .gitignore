@@ -1,0 +1,7 @@
+*~
+*.o
+*.hi
+Language/AsGArD/Lexer.hs
+Language/AsGArD/Parser.hs
+Language/AsGArD/Parser.info
+SintAsgard

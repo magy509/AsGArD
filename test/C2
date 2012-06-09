@@ -1,0 +1,5 @@
+end
+contador using integer of type
+{- Asignar al 35el valor contador? -}
+35 := contador
+begin

@@ -1,0 +1,17 @@
+of type         {- Con un espacio normal        -}
+of	type    {- Con un tabulador             -}
+of
+type            {- Con un fin de línea          -}
+of         
+       
+   		          
+         		   	
+type            {- Con muchos de los anteriores -}
+of{- Con un comentario -}type
+of{-Con-}{- varios -}{- comentarios -}type
+of    {- Con
+
+      	        un-}	   	   {-
+     poco de
+todo-}type
+{-hola--}

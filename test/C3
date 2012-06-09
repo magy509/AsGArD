@@ -1,0 +1,3 @@
+using contador! of type integer begin
+contador ?:= 35
+end
