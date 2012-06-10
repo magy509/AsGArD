@@ -24,7 +24,7 @@ $alpha = [a-zA-Z]
 @blancos = (($white) | (@comentarios))+
 
 tokens :-
-        @literalcanvas         { tok (\ (AlexPn line col _) s -> TkLienzo $ readCanvas s) }
+        @literalcanvas         { tok (\ (AlexPn line col _) s -> TkLienzo line col $ readCanvas s) }
         "using"                { tok (\ (AlexPn line col _) s -> TkUsing line col       ) }
         "of" @blancos "type"   { tok (\ (AlexPn line col _) s -> TkOfType line col      ) }
         "canvas"	       { tok (\ (AlexPn line col _) s -> TkCanvas line col      ) }
@@ -68,7 +68,7 @@ tokens :-
         "$"                    { tok (\ (AlexPn line col _) s -> TkRot line col         ) }
         "'"                    { tok (\ (AlexPn line col _) s -> TkTras line col        ) }
         ":="                   { tok (\ (AlexPn line col _) s -> TkAsignacion line col  ) }
-        $digit+                { tok (\ (AlexPn line col _) s -> TkNum $ line col read s) }
+        $digit+                { tok (\ (AlexPn line col _) s -> TkNum line col $ read s) }
         $alpha[$alpha $digit]* { tok (\ (AlexPn line col _) s -> TkIdent line col s     ) }
         $white+;
         @blancos+;
