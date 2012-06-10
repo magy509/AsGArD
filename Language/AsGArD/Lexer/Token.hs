@@ -30,7 +30,7 @@ data Token = TkNum { fila, columna :: Int, número :: Integer }
            | TkBoolean { fila, columna :: Int }
            | TkTrue { fila, columna :: Int }
            | TkFalse { fila, columna :: Int }
-           | TkLienzo { fila, columna :: Int, lienzo :: String }
+           | TkLienzo { fila, columna :: Int, lienzo :: LiteralCanvas }
            | TkComa { fila, columna :: Int }
            | TkPuntoYComa { fila, columna :: Int }
            | TkParAbre { fila, columna :: Int }

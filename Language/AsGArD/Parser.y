@@ -18,53 +18,53 @@ import Language.AsGArD.Lexer.Token
 %error { parseError }
 
 %token
-        "using"         { TkUsing       }
-        "of type"       { TkOfType      }
-        "canvas"        { TkCanvas      }
-        "while"         { TkWhile       }
-        "read"          { TkRead        }
-        "begin"         { TkBegin       }
-        "from"          { TkFrom        }
-        "to"            { TkTo          }
-        "repeat"        { TkRepeat      }
-        "with"          { TkWith        }
-        "if"            { TkIf          }
-        "then"          { TkThen        }
-        "else"          { TkElse        }
-        "done"          { TkDone        }
-        "end"           { TkEnd         }
-        "print"         { TkPrint       }
-        "integer"       { TkInteger     }
-        "boolean"       { TkBoolean     }
-        "true"          { TkTrue        }
-        "false"         { TkFalse       }
-        "coma"          { TkComa        }
-        "pcoma"         { TkPuntoYComa  }
-        "("             { TkParAbre     }
-        ")"             { TkParCierra   }
-        "suma"          { TkSuma        }
-        "resta"         { TkResta       }
-        "mult"          { TkMult        }
-        "division"      { TkDiv         }
-        "modulo"        { TkMod         }
-        "conj"          { TkConjuncion  }
-        "disj"          { TkDisyuncion  }
-        "negacion"      { TkNegacion    }
-        "menor"         { TkMenor       }
-        "menori"        { TkMenorIgual  }
-        "mayor"         { TkMayor       }
-        "mayori"        { TkMayorIgual  }
-        "igual"         { TkIgual       }
-        "desigual"      { TkDesigual    }
-        "hconcat"       { TkHorConcat   }
-        "vconcat"       { TkVerConcat   }
-        "rotacion"      { TkRot         }
-        "trasposicion"  { TkTras        }
-        "asignacion"    { TkAsignacion  }
-        Canvas   	{ TkLienzo      }
-        Numero          { TkNum         }
-        Ident           { TkIdent       }
-        Errores         { TkError       }
+        "using"         { TkUsing _ _      }
+        "of type"       { TkOfType _ _     }
+        "canvas"        { TkCanvas _ _     }
+        "while"         { TkWhile _ _      }
+        "read"          { TkRead _ _       }
+        "begin"         { TkBegin _ _      }
+        "from"          { TkFrom _ _       }
+        "to"            { TkTo _ _         }
+        "repeat"        { TkRepeat _ _     }
+        "with"          { TkWith _ _       }
+        "if"            { TkIf _ _         }
+        "then"          { TkThen _ _       }
+        "else"          { TkElse _ _       }
+        "done"          { TkDone _ _       }
+        "end"           { TkEnd _ _        }
+        "print"         { TkPrint _ _      }
+        "integer"       { TkInteger _ _    }
+        "boolean"       { TkBoolean _ _    }
+        "true"          { TkTrue _ _       }
+        "false"         { TkFalse _ _      }
+        "coma"          { TkComa _ _       }
+        "pcoma"         { TkPuntoYComa _ _ }
+        "("             { TkParAbre _ _    }
+        ")"             { TkParCierra _ _  }
+        "suma"          { TkSuma _ _       }
+        "resta"         { TkResta _ _      }
+        "mult"          { TkMult _ _       }
+        "division"      { TkDiv _ _        }
+        "modulo"        { TkMod _ _        }
+        "conj"          { TkConjuncion _ _ }
+        "disj"          { TkDisyuncion _ _ }
+        "negacion"      { TkNegacion _ _   }
+        "menor"         { TkMenor _ _      }
+        "menori"        { TkMenorIgual _ _ }
+        "mayor"         { TkMayor _ _      }
+        "mayori"        { TkMayorIgual _ _ }
+        "igual"         { TkIgual _ _      }
+        "desigual"      { TkDesigual _ _   }
+        "hconcat"       { TkHorConcat _ _  }
+        "vconcat"       { TkVerConcat _ _  }
+        "rotacion"      { TkRot _ _        }
+        "trasposicion"  { TkTras _ _       }
+        "asignacion"    { TkAsignacion _ _ }
+        Canvas   	{ TkLienzo _ _ _   }
+        Numero          { TkNum _ _ _      }
+        Ident           { TkIdent _ _ _    }
+        Errores         { TkError _ _ _    }
 
 
 --Reglas de Precedencia
@@ -153,5 +153,5 @@ Tipo:
 
 --parseError ts = error $ "error en el token " ++ show (head ts)
 parseError [] = error "¡Carambolas, se encogieron mis polainas!"
-parseError (t:_) = error "Pasó algo malo en " ++ fila t
+parseError (t:_) = error "Pasó algo malo en la fila " ++ show t
 }
