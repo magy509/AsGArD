@@ -72,3 +72,7 @@ tokens :-
         @blancos+;
 
         . { tok (\ (AlexPn _ line col) s -> TkError s line col) }
+
+{
+tok = id
+}

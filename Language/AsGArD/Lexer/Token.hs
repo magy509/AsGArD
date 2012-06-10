@@ -55,6 +55,7 @@ data Token = TkNum Int
            | TkTras
            | TkAsignacion
            | TkError String Int Int
+           deriving (Eq)
 
 instance Show Token where
   show t = case t of
@@ -113,6 +114,7 @@ data LiteralCanvas = Empty
                    | Underscore
                    | Dash
                    | Blank
+                   deriving (Eq)
 
 readCanvas::String->LiteralCanvas
 readCanvas s = case s of

@@ -53,16 +53,15 @@ import Language.AsGArD.Lexer.Token
         "rotacion"      { TkRot         }
         "trasposicion"  { TkTras        }
         "asignacion"    { TkAsignacion  }
-        Literalcanvas   { TkLienzo $$   }
+        Canvas   	{ TkLienzo $$   }
         Numero          { TkNum $$      }
         Ident           { TkIdent $$    }
 --      Errores         { TkError $$    }
 
 
-
+--Reglas de Precedencia
 %left           "coma"
 %left           "pcoma"
--- %right               "asignacion"
 %left           "disj"
 %left           "conj"
 %left           "igual" "desigual"
@@ -80,26 +79,26 @@ import Language.AsGArD.Lexer.Token
 %%
 
 
-
-
-
 -- Definicion de las reglas de la gramatica
 Programa:
-          "begin" Instruccion "end"                             { Programa $2           }
-        | "using" ListaDeclaracion "begin" Instruccion "end"    { Programa $1 $3        }
+          "begin" ListaInstrucciones "end"                               { Programa [] $2 }
+        | "using" ListaDeclaraciones "begin" ListaInstrucciones "end"    { Programa $2 $4 }
 
-ListaDeclaracion:
-          ListaIdentificadores "of type" Tipo                           { ListaDeclaracion $1 $3        }
-        | ListaDeclaracion "pcoma" ListaIdentificadores "of type" Tipo  { ListaDeclaracion $1 $3  $5    }
+ListaDeclaraciones:
+	Declaracion				 { [$1]     }
+	| ListaDeclaraciones "pcoma" Declaracion { $1++[$3] }
 
-ListaIdentificadores:
-          Identificador "of type" Tipo                                  { ListaIdentificadores $1 $3    }
-        | ListaIdentificadores "coma" Identificador "of type" Tipo      { ListaIdentificadores $1 $3 $5 }
+Declaracion:
+          Identificadores "of type" Tipo  { Declaracion $1 $3 }
 
-Exp: -- Reglas para las expresiones
+Identificadores:
+	  Ident				{ [$1]     }
+	| Identificadores "coma" Ident 	{ $1++[$3] }
+
+Exp:
           Exp "suma" Exp                        { ExpBinaria    $1 Suma $3      }
         | Exp "resta" Exp                       { ExpBinaria    $1 Resta $3     }
-        | "resta" Exp   %prec MUnario           { ExpPrefija     Resta $2        }
+        | "resta" Exp   %prec MUnario           { ExpPrefija     Resta $2       }
         | Exp "mult" Exp                        { ExpBinaria    $1 Mult $3      }
         | Exp "division" Exp                    { ExpBinaria    $1 Division $3  }
         | Exp "modulo" Exp                      { ExpBinaria    $1 Modulo $3    }
@@ -118,31 +117,29 @@ Exp: -- Reglas para las expresiones
         | Exp "trasposicion" %prec Ranita       { ExpPostfija   $1 Trasposicion }
         | "(" Exp ")"                           { ExpParentesis $2              }
         | Numero                                { ExpNumero     $1              }
-        | "true"                                { ExpTrue       True            }
-        | "false"                               { ExpFalse      False           }
-        | Literalcanvas                         { ExpCanvas     $1              }
+        | "true"                                { ExpTrue                       }
+        | "false"                               { ExpFalse                      }
+        | Canvas	                	{ ExpCanvas     $1              }
 
--- Reglas para las instrucciones
+ListaInstrucciones:
+	  Instruccion                            { [$1]     }
+	| ListaInstrucciones "pcoma" Instruccion { $1++[$3] }
+
 Instruccion:
-          Identificador "asignacion" Exp                                        { InstrAsignacion       $1 $3           }
-        | Instruccion "pcoma" Instruccion                                       { InstrSecuenciacion    $1 $3           }
-        | "if" Exp "then" Instruccion "done"                                    { InstrCondicional      $2 $4           }
-        | "if" Exp "then" Instruccion "else" Instruccion "done"                 { InstrCondicional      $2 $4 $6        }
-        | "while" Exp "repeat" Instruccion "done"                               { InstrRepeticionInd    $2 $4           }
-        | "from" Exp "to" Exp "repeat" Instruccion "done"                       { InstrRepeticionDet    $2 $4 $6        }
-        | "with" Identificador "from" Exp "to" Exp "repeat" Instruccion "done"  { InstrRepeticionDet    $2 $4 $6 $8     }
-        | "begin" Instruccion "end"                                             { InstrAlcance          $2              }
-        | "using" ListaDeclaracion "begin" Instruccion "end"                    { InstrAlcance          $2 $4           }
-        | "read" "(" Instruccion ")"                                            { InstrRead             $3              }
-        | "print" "(" Exp ")"                                                   { InstrPrint            $3              }
+          Ident "asignacion" Exp                                               { InstrAsignacion        $1 $3       }
+        | "if" Exp "then" ListaInstrucciones "done"                            { InstrCondicional       $2 $4       }
+        | "if" Exp "then" ListaInstrucciones "else" ListaInstrucciones "done"  { InstrCondicionalElse   $2 $4 $6    }
+        | "while" Exp "repeat" ListaInstrucciones "done"                       { InstrRepeticionInd     $2 $4       }
+        | "from" Exp "to" Exp "repeat" ListaInstrucciones "done"               { InstrRepeticionDetBase $2 $4 $6    }
+        | "with" Ident "from" Exp "to" Exp "repeat" ListaInstrucciones "done"  { InstrRepeticionDet     $2 $4 $6 $8 }
+        | "using" ListaDeclaraciones "begin" ListaInstrucciones "end"          { InstrAlcance           $2 $4       }
+        | "read" "(" ListaInstrucciones ")"                                    { InstrRead              $3          }
+        | "print" "(" Exp ")"                                                  { InstrPrint             $3          }
 
 Tipo:
           "integer"     { TInteger }
         | "boolean"     { TBoolean }
         | "canvas"      { TCanvas  }
-
-Identificador:
-        Ident { Identificador $1 }
 
 {
 parseError = error "¡Carambolas, se encogieron mis polainas!"
