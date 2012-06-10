@@ -2,12 +2,30 @@ module Main (main) where
 
 import Language.AsGArD.Lexer (alexScanTokens)
 import Language.AsGArD.Parser (parse)
+import Language.AsGArD.Lexer.Token
 
-main = print . parse . alexScanTokens =<< getContents
+-- Some action helpers:
+tok f p s = f p s
 
--- Algo sobre el main que no quiero hacer T_T
--- main = do
--- 	inStr <- getContents
--- 	let parseTree = newl (alexScanTokens inStr) 
--- 	putStrLn ("parseTree:" ++ show(parseTree))
--- 	print "done"
+printElements :: [Token] -> IO ()
+printElements = mapM_ print
+
+
+main = do ts <- alexScanTokens <$> getContents
+	  if any isError ts then putStr . unlines . map show . filter isError $ tokens s else putStr . unlines . map show $ ts
+
+
+
+-- main = do s <- getContents
+--           mapM_ print $ if null $ errores s then tokens s
+--                                             else errores s
+--           where
+--                 isError (TkError _ _ _) = True
+--                 isError _               = False
+-- 
+--                 tokens s = alexScanTokens s
+--                 errores s = filter isError $ tokens s
+--                 
+--                 
+--                 
+-- main = print . parse . alexScanTokens =<< getContents
