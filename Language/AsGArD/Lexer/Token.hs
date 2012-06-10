@@ -70,7 +70,7 @@ instance Show Token where
     TkBegin _ _      -> "TkBegin"
     TkFrom _ _       -> "TkFrom"
     TkTo _ _         -> "TkTo"
-    TkRepeat_ _      -> "TkRepeat"
+    TkRepeat _ _      -> "TkRepeat"
     TkWith _ _       -> "TkWith"
     TkIf _ _         -> "TkIf"
     TkThen _ _       -> "TkThen"
@@ -105,7 +105,7 @@ instance Show Token where
     TkRot _ _        -> "TkRot"
     TkTras _ _       -> "TkTras"
     TkAsignacion _ _ -> "TkAsignacion"
-    TkError i j k    -> "Error: En la fila " ++ show j ++ ", columna " ++ show k " está el caracter inesperado " ++ show i ++
+    TkError i j k    -> "Error: En la fila " ++ show j ++ ", columna " ++ show k ++ " está el caracter inesperado " ++ show i
 
 
 data LiteralCanvas = Empty
