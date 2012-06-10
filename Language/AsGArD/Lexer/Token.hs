@@ -1,10 +1,10 @@
-{-  Module LiteralCanvas
-*   Universidad Simón Bolívar
-**  Laboratorio de Traductores e Interpretadores (CI-3725)
-**  Proyecto 1 - Lexer usando Haskell y Alex
-**  Desarrollado por: Christian Chomiak    05-38034
-**                    Maria Gracia Hidalgo 03-36048
--}
+-- 	Module Main
+-- 	Universidad Simón Bolívar
+-- 	Laboratorio de Traductores e Interpretadores (CI-3725)
+-- 	Proyecto 2 - Parser usando Haskell y Happy
+-- 	Desarrollado por:		Christian Chomiak 	05-38034
+-- 					Maria Gracia Hidalgo    03-36048
+
 
 module Language.AsGArD.Lexer.Token where
 
