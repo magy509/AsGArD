@@ -14,7 +14,7 @@ import Language.AsGArD.Lexer.Token
 data Programa = Programa [Declaracion] [Instruccion]
               deriving (Eq, Show)
 
-data Declaracion = Declaracion [Ident] Tipo                 
+data Declaracion = Declaracion [Token] Tipo                 
                  deriving (Eq, Show)
 
 data Tipo = TInteger                    
@@ -28,8 +28,8 @@ data Exp = ExpBinaria Exp Oper Exp
          | ExpParentesis Exp
          | ExpCanvas LiteralCanvas
          | ExpNumero Numero
-         | ExpTrue -- Boolean
-         | ExpFalse -- Boolean
+         | ExpTrue
+         | ExpFalse
          deriving (Eq, Show)
 
 data Oper = Suma
@@ -52,21 +52,16 @@ data Oper = Suma
           | Trasposicion
         deriving (Eq, Show)
 
-data Instruccion = InstrAsignacion Ident Exp
+data Instruccion = InstrAsignacion Token Exp
                  | InstrCondicional Exp [Instruccion]
                  | InstrCondicionalElse Exp [Instruccion] [Instruccion]
                  | InstrRepeticionInd Exp [Instruccion]
 		 | InstrRepeticionDetBase Exp Exp [Instruccion]
-                 | InstrRepeticionDet Ident Exp Exp [Instruccion]
+                 | InstrRepeticionDet Token Exp Exp [Instruccion]
 		 | InstrAlcance [Declaracion] [Instruccion]
                  | InstrRead [Instruccion]
                  | InstrPrint Exp
                  deriving (Eq, Show)
 
-type Ident = String
+type Numero = Integer
 
---type Canvas = LiteralCanvas
-
-type Numero = Int
-
---type Boolean = String

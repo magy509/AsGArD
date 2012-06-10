@@ -7,8 +7,6 @@
 
 
 {
-
-
 module Language.AsGArD.Parser where
 
 import Language.AsGArD.Parser.AST
@@ -63,10 +61,10 @@ import Language.AsGArD.Lexer.Token
         "rotacion"      { TkRot         }
         "trasposicion"  { TkTras        }
         "asignacion"    { TkAsignacion  }
-        Canvas   	{ TkLienzo $$   }
-        Numero          { TkNum $$      }
-        Ident           { TkIdent $$    }
---      Errores         { TkError $$    }
+        Canvas   	{ TkLienzo      }
+        Numero          { TkNum         }
+        Ident           { TkIdent       }
+        Errores         { TkError       }
 
 
 --Reglas de Precedencia
@@ -126,10 +124,10 @@ Exp:
         | "rotacion" Exp                        { ExpPrefija    Rotacion $2     }
         | Exp "trasposicion" %prec Ranita       { ExpPostfija   $1 Trasposicion }
         | "(" Exp ")"                           { ExpParentesis $2              }
-        | Numero                                { ExpNumero     $1              }
+        | Numero                                { ExpNumero     (número $1)     }
         | "true"                                { ExpTrue                       }
         | "false"                               { ExpFalse                      }
-        | Canvas	                	{ ExpCanvas     $1              }
+        | Canvas	                	{ ExpCanvas     (lienzo $1)     }
 
 ListaInstrucciones:
 	  Instruccion                            { [$1]     }
@@ -152,5 +150,8 @@ Tipo:
         | "canvas"      { TCanvas  }
 
 {
-parseError = error "¡Carambolas, se encogieron mis polainas!"
+
+--parseError ts = error $ "error en el token " ++ show (head ts)
+parseError [] = error "¡Carambolas, se encogieron mis polainas!"
+parseError (t:_) = error "Pasó algo malo en " ++ fila t ++
 }
