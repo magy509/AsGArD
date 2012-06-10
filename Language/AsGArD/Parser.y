@@ -153,5 +153,5 @@ Tipo:
 
 --parseError ts = error $ "error en el token " ++ show (head ts)
 parseError [] = error "¡Carambolas, se encogieron mis polainas!"
---parseError (t:_) = error "Pasó algo malo en la fila " ++ show t
+parseError (t:_) = error $ "Pasó algo malo en la " ++ show(fila t)
 }
