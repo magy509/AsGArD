@@ -1,0 +1,8 @@
+using foo, bar of type integer begin
+bar := 3 ;
+{- Asignar a foo
+el valor 35 + bar, si bar > 2. -}
+if bar > 2 then
+foo := 35 + bar
+done
+end
