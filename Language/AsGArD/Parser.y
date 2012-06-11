@@ -104,30 +104,31 @@ Identificadores:
 	| Identificadores "coma" Ident 	{ $1++[$3] }
 
 Exp:
-          Exp "suma" Exp                        { ExpBinaria    $1 Suma $3      }
-        | Exp "resta" Exp                       { ExpBinaria    $1 Resta $3     }
-        | "resta" Exp   %prec MUnario           { ExpPrefija     Resta $2       }
-        | Exp "mult" Exp                        { ExpBinaria    $1 Mult $3      }
-        | Exp "division" Exp                    { ExpBinaria    $1 Division $3  }
-        | Exp "modulo" Exp                      { ExpBinaria    $1 Modulo $3    }
-        | Exp "menor" Exp                       { ExpBinaria    $1 Menor $3     }
-        | Exp "menori" Exp                      { ExpBinaria    $1 Menori $3    }
-        | Exp "mayor" Exp                       { ExpBinaria    $1 Mayor $3     }
-        | Exp "mayori" Exp                      { ExpBinaria    $1 Mayori $3    }
-        | Exp "igual" Exp                       { ExpBinaria    $1 Igual $3     }
-        | Exp "negacion" %prec NUnaria          { ExpPostfija   $1 Negacion     }
-        | Exp "conj" Exp                        { ExpBinaria    $1 Conj $3      }
-        | Exp "disj" Exp                        { ExpBinaria    $1 Disj $3      }
-        | Exp "desigual" Exp                    { ExpBinaria    $1 Desigual $3  }
-        | Exp "hconcat" Exp                     { ExpBinaria    $1 Hconcat $3   }
-        | Exp "vconcat" Exp                     { ExpBinaria    $1 Vconcat $3   }
-        | "rotacion" Exp                        { ExpPrefija    Rotacion $2     }
-        | Exp "trasposicion" %prec Ranita       { ExpPostfija   $1 Trasposicion }
-        | "(" Exp ")"                           { ExpParentesis $2              }
-        | Numero                                { ExpNumero     (número $1)     }
-        | "true"                                { ExpTrue                       }
-        | "false"                               { ExpFalse                      }
-        | Canvas	                	{ ExpCanvas     (lienzo $1)     }
+          Exp "suma" Exp                        { ExpBinaria    $1 Suma $3         }
+        | Exp "resta" Exp                       { ExpBinaria    $1 Resta $3        }
+        | "resta" Exp   %prec MUnario           { ExpPrefija    Resta $2           }
+        | Exp "mult" Exp                        { ExpBinaria    $1 Mult $3         }
+        | Exp "division" Exp                    { ExpBinaria    $1 Division $3     }
+        | Exp "modulo" Exp                      { ExpBinaria    $1 Modulo $3       }
+        | Exp "menor" Exp                       { ExpBinaria    $1 Menor $3        }
+        | Exp "menori" Exp                      { ExpBinaria    $1 Menori $3       }
+        | Exp "mayor" Exp                       { ExpBinaria    $1 Mayor $3        }
+        | Exp "mayori" Exp                      { ExpBinaria    $1 Mayori $3       }
+        | Exp "igual" Exp                       { ExpBinaria    $1 Igual $3        }
+        | Exp "negacion" %prec NUnaria          { ExpPostfija   $1 Negacion        }
+        | Exp "conj" Exp                        { ExpBinaria    $1 Conj $3         }
+        | Exp "disj" Exp                        { ExpBinaria    $1 Disj $3         }
+        | Exp "desigual" Exp                    { ExpBinaria    $1 Desigual $3     }
+        | Exp "hconcat" Exp                     { ExpBinaria    $1 Hconcat $3      }
+        | Exp "vconcat" Exp                     { ExpBinaria    $1 Vconcat $3      }
+        | "rotacion" Exp                        { ExpPrefija    Rotacion $2        }
+        | Exp "trasposicion" %prec Ranita       { ExpPostfija   $1 Trasposicion    }
+        | "(" Exp ")"                           { ExpParentesis $2                 }
+	| Ident                                 { ExpIdent      $1                 }
+        | Numero                                { ExpNumero     (número $1)        }
+        | "true"                                { ExpTrue                          }
+        | "false"                               { ExpFalse                         }
+        | Canvas	                	{ ExpCanvas     (lienzo $1)        }
 
 ListaInstrucciones:
 	  Instruccion                            { [$1]     }

@@ -27,6 +27,7 @@ data Exp = ExpBinaria Exp Oper Exp
          | ExpPostfija Exp Oper
          | ExpParentesis Exp
          | ExpCanvas LiteralCanvas
+	 | ExpIdent Token
          | ExpNumero Numero
          | ExpTrue
          | ExpFalse
