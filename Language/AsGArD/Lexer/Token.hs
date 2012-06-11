@@ -105,7 +105,7 @@ instance Show Token where
     TkRot _ _        -> "TkRot"
     TkTras _ _       -> "TkTras"
     TkAsignacion _ _ -> "TkAsignacion"
-    TkError i j k    -> "Error: En la fila " ++ show i ++ ", columna " ++ show j ++ " se encuentra el caracter inesperado " ++ show k
+    TkError i j k    -> "Error: En la fila " ++ show j ++ ", caracter " ++ show i ++ " se encuentra el caracter inesperado " ++ show k
 
 
 data LiteralCanvas = Empty

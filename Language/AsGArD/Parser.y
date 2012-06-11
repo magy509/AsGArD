@@ -64,7 +64,6 @@ import Language.AsGArD.Lexer.Token
         Canvas   	{ TkLienzo _ _ _   }
         Numero          { TkNum _ _ _      }
         Ident           { TkIdent _ _ _    }
-        Errores         { TkError _ _ _    }
 
 
 --Reglas de Precedencia
@@ -142,8 +141,8 @@ Instruccion:
         | "from" Exp "to" Exp "repeat" ListaInstrucciones "done"               { InstrRepeticionDetBase $2 $4 $6    }
         | "with" Ident "from" Exp "to" Exp "repeat" ListaInstrucciones "done"  { InstrRepeticionDet     $2 $4 $6 $8 }
         | "using" ListaDeclaraciones "begin" ListaInstrucciones "end"          { InstrAlcance           $2 $4       }
-        | "read" "(" ListaInstrucciones ")"                                    { InstrRead              $3          }
-        | "print" "(" Exp ")"                                                  { InstrPrint             $3          }
+        | "read" Ident                                                         { InstrRead              $2          }
+        | "print" Exp                                                          { InstrPrint             $2          }
 
 Tipo:
           "integer"     { TInteger }
@@ -152,7 +151,6 @@ Tipo:
 
 {
 
---parseError ts = error $ "error en el token " ++ show (head ts)
 parseError [] = error "¡Carambolas, se encogieron mis polainas!"
-parseError (t:_) = error $ "Error inesperado en la fila " ++ show(fila t) ++ ", columna " ++ show(columna t) ++ ", con el Token " ++ show t
+parseError (t:_) = error $ "Error inesperado en la fila " ++ show(fila t) ++ ", caracter " ++ show(columna t) ++ ", con el Token " ++ show t
 }

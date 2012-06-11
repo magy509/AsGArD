@@ -60,7 +60,7 @@ data Instruccion = InstrAsignacion Token Exp
 		 | InstrRepeticionDetBase Exp Exp [Instruccion]
                  | InstrRepeticionDet Token Exp Exp [Instruccion]
 		 | InstrAlcance [Declaracion] [Instruccion]
-                 | InstrRead [Instruccion]
+                 | InstrRead Token
                  | InstrPrint Exp
                  deriving (Eq, Show)
 
