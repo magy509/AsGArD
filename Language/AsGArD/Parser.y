@@ -61,7 +61,7 @@ import Language.AsGArD.Lexer.Token
         "rotacion"      { TkRot _ _        }
         "trasposicion"  { TkTras _ _       }
         "asignacion"    { TkAsignacion _ _ }
-        Canvas   	{ TkLienzo _ _ _   }
+        Canvas          { TkLienzo _ _ _   }
         Numero          { TkNum _ _ _      }
         Ident           { TkIdent _ _ _    }
 
@@ -123,7 +123,7 @@ Exp:
         | "rotacion" Exp                        { ExpPrefija    Rotacion $2        }
         | Exp "trasposicion" %prec Ranita       { ExpPostfija   $1 Trasposicion    }
         | "(" Exp ")"                           { ExpParentesis $2                 }
-	| Ident                                 { ExpIdent      $1                 }
+        | Ident                                 { ExpIdent      $1                 }
         | Numero                                { ExpNumero     (número $1)        }
         | "true"                                { ExpTrue                          }
         | "false"                               { ExpFalse                         }

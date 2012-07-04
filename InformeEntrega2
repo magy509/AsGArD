@@ -1,0 +1,15 @@
+En el archivo Parser.y se definen las reglas de la gramática, reglas de precedencia y se declara la lista de Tokens que será utilizada
+por el parser. En esta lista, las expresiones regulares utilizadas en Lexer.x fueron sustituidas por un nombre que identifica al Token
+asociado.
+
+El archivo AST.hs contiene la declaración de los tipos de datos que representan a las expresiones definidas en Parser.y.
+
+El archivo Main.hs imprime los errores léxicos o de sintaxis que tiene el programa (si es el caso) o, en caso de que no haya tales errores,
+imprime el árbol sintáctico del programa a ser leido.
+
+Para compilar el archivo, basta con emplear el Makefile de la forma habitual.
+
+Para ejecutar el programa, es necesario escribir el comando ./SintAsgard < "NombreDelArchivo"
+
+Se realizaron modificaciones y correcciones a los archivos presentados en la primera entrega, a fin de que el programa actual permitiera
+desarrollar lo solicitado para el analizador sintáctico.

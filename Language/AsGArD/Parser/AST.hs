@@ -78,9 +78,9 @@ data Instruccion = InstrAsignacion Token Exp
                  | InstrCondicional Exp [Instruccion]
                  | InstrCondicionalElse Exp [Instruccion] [Instruccion]
                  | InstrRepeticionInd Exp [Instruccion]
-		 | InstrRepeticionDetBase Exp Exp [Instruccion]
+                 | InstrRepeticionDetBase Exp Exp [Instruccion]
                  | InstrRepeticionDet Token Exp Exp [Instruccion]
-		 | InstrAlcance [Declaracion] [Instruccion]
+                 | InstrAlcance [Declaracion] [Instruccion]
                  | InstrRead Token
                  | InstrPrint Exp
                  deriving (Eq)
