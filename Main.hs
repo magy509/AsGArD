@@ -1,3 +1,10 @@
+--  Module Main
+--  Universidad Simón Bolívar
+--  Laboratorio de Traductores e Interpretadores (CI-3725)
+--  Proyecto 3 - Análisis de Contexto e Intérprete
+--  Desarrollado por: Christian Chomiak     05-38034
+--                    Maria Gracia Hidalgo  03-36048
+
 module Main (main) where
 
 import Language.AsGArD.Lexer (alexScanTokens)

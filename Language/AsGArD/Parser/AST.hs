@@ -1,9 +1,9 @@
--- 	Module Main
--- 	Universidad Simón Bolívar
--- 	Laboratorio de Traductores e Interpretadores (CI-3725)
--- 	Proyecto 2 - Parser usando Haskell y Happy
--- 	Desarrollado por:		Christian Chomiak 	05-38034
--- 					Maria Gracia Hidalgo    03-36048
+-- Module Main
+-- Universidad Simón Bolívar
+-- Laboratorio de Traductores e Interpretadores (CI-3725)
+-- Proyecto 3 - Análisis de Contexto e Intérprete
+-- Desarrollado por: Christian Chomiak      05-38034
+--                   Maria Gracia Hidalgo   03-36048
 
 
 module Language.AsGArD.Parser.AST where
@@ -54,25 +54,37 @@ instance Show Exp where
    ExpFalse -> "ExpFalse"
 
 
-data Oper = Suma
-          | Resta
-          | Mult
-          | Division
-          | Modulo
-          | Menor
-          | Menori
-          | Mayor
-          | Mayori
-          | Igual
-          | Conj
-          | Disj
-          | Desigual
-          | Hconcat
-          | Vconcat
-          | Negacion
-          | Rotacion
-          | Trasposicion
+data Oper = OperAritmetico
+          | OperBooleano
+          | OperCanvas
         deriving (Eq, Show)
+
+data OperAritmetico =
+      Suma
+    | Resta
+    | Mult
+    | Division
+    | Modulo
+    | Menor
+    | Menori
+    | Mayor
+    | Mayori
+    deriving (Eq, Show)        
+        
+data OperBooleano =
+      Conj
+    | Disj
+    | Negacion
+    | Igual
+    | Desigual
+    deriving (Eq, Show)
+
+data OperCanvas =
+      Hconcat
+    | Vconcat
+    | Rotacion
+    | Trasposicion
+    deriving (Eq, Show)        
 
 data Instruccion = InstrAsignacion Token Exp
                  | InstrCondicional Exp [Instruccion]
