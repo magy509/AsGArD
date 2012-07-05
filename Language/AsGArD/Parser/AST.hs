@@ -54,12 +54,7 @@ instance Show Exp where
    ExpFalse -> "ExpFalse"
 
 
-data Oper = OperAritmetico
-          | OperBooleano
-          | OperCanvas
-        deriving (Eq, Show)
-
-data OperAritmetico =
+data Oper = 
       Suma
     | Resta
     | Mult
@@ -69,18 +64,12 @@ data OperAritmetico =
     | Menori
     | Mayor
     | Mayori
-    deriving (Eq, Show)        
-        
-data OperBooleano =
-      Conj
+    | Conj
     | Disj
     | Negacion
     | Igual
     | Desigual
-    deriving (Eq, Show)
-
-data OperCanvas =
-      Hconcat
+    | Hconcat
     | Vconcat
     | Rotacion
     | Trasposicion

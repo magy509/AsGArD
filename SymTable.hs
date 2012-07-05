@@ -9,7 +9,7 @@ module SymTable(
   SymTable(..),
   Symbol(..),
   Tipo(..),
-  Value(..),
+  SymValue(..),
   find,
   insert,
   isMember,
@@ -26,6 +26,7 @@ data SymTable = SymTable (Maybe SymTable) (Map.Map String Symbol)
 
 data Symbol = SymDec [Token] Tipo --FIXME
             | SymInstr Instruccion
+            | VarSymbol Token Tipo (Maybe SymValue)
             deriving (Eq, Show)
 
 -- Argumentos que una instruccion puede tener.
@@ -35,7 +36,7 @@ data SymArgs = Tipo
              deriving (Eq, Show)
 
 -- Valores que una variable Symbol puede tomar.
-data Value = Numero Integer
+data SymValue = Numero Integer
               | Booleano Bool
               | Canvas String
               deriving (Eq, Show)

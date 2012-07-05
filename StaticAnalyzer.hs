@@ -70,9 +70,25 @@ checkAsig nombre st (InstrAsignacion identificador _)
         
 getTypeOper::Oper->Tipo
 getTypeOper oper = case oper of
-                 OperAritmetico -> TInteger
-                 OperBooleano   -> TBoolean
-                 OperCanvas     -> TCanvas
+                 Suma           -> TInteger
+                 Resta          -> TInteger
+                 Mult            -> TInteger
+                 Division       -> TInteger
+                 Modulo         -> TInteger
+                 Mayor          -> TInteger
+                 Menor          -> TInteger
+                 Mayori         -> TInteger
+                 Menori         -> TInteger
+                 Conj           -> TBoolean
+                 Disj           -> TBoolean
+                 Negacion       -> TBoolean
+                 Igual          -> TBoolean
+                 Desigual       -> TBoolean
+                 Hconcat        -> TCanvas
+                 Vconcat        -> TCanvas
+                 Rotacion       -> TCanvas
+                 Trasposicion   -> TCanvas
+                 
      
 getTypeDec :: SymTable -> Symbol -> Tipo
 getTypeDec st (SymDec [token] tipo)
